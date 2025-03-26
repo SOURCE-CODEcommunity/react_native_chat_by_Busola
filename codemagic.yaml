@@ -1,9 +1,14 @@
 workflows:
-
-    sample-workflow:
-
-        name: react_native_chat
-
-        max_build_duration: 120
-
-        instance_type: linux
+  android-workflow:
+    name: react_native_chat
+    max_build_duration: 120
+    instance_type: linux
+    environment:
+      vars:
+        REACT_NATIVE_ENV: production
+    scripts:
+      - npm install
+      - cd android
+      - ./gradlew assembleRelease
+    artifacts:
+      - android/app/build/outputs/apk/release/app-release.apk
